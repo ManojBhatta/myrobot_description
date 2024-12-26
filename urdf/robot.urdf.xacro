@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<robot name="robot_name" xmlns:xacro="http://ros.org/wiki/xacro">
+    <material name="blue">
+        <color rgba="0 0 0.8 1" />
+    </material>
+    <material name="grey">
+        <color rgba="0.9 0.95 0.95 1.0" />
+    </material>
+
+    <material name="black">
+        <color rgba="0 0 0 1" />
+    </material>
+
+    <material name="green">
+        <color rgba="0.0 0.8 0.0 1.0" />
+    </material>
+
+    <xacro:property name="scale_stl" value="0.001001 0.001001 0.001001" />
+    <xacro:property name="wheel_dist_x" value="0.21" />
+    <xacro:property name="wheel_dist_y" value="0.35" />
+    <xacro:property name="lidar_dist_x" value="0.363" />
+    <xacro:property name="lidar_dist_y" value="0" />
+    <xacro:property name="lidar_dist_z" value="0.239" />
+    <xacro:property name="pie" value="3.1415926" />
+
+
+    <!-- Root Link -->
+    <link name="base_link">
+    </link>
+
+    <link name="base">
+        <visual name="">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <mesh filename="package://robot_description/stl/Base.stl"
+                    scale="${scale_stl}" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://robot_description/stl/Base.stl"
+                    scale="${scale_stl}" />
+            </geometry>
+
+        </collision>
+    </link>
+
+
+    <!-- Joint to Connect Links -->
+    <joint name="base_link_to_base" type="fixed">
+        <parent link="base_link" />
+        <child link="base" />
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    </joint>
+
+
+ 
+    <joint name="front_right_wheel_joint" type="continuous">
+        <origin xyz="${wheel_dist_x} -${wheel_dist_y} 0" rpy="0 0 0" />
+        <parent link="base" />
+        <child link="front_right_wheel" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <link name="front_right_wheel">
+        <visual>
+            <origin rpy="0 0 0 " xyz="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/stl/blue_tyre.stl"
+                    scale="${scale_stl}" />
+            </geometry>
+            <material name="black" />
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0 " />
+            <geometry>
+                <mesh filename="package://robot_description/stl/blue_tyre.stl"
+                    scale="${scale_stl}" />
+            </geometry>
+        </collision>
+    </link>
+
+
+    <joint name="front_left_wheel_joint" type="continuous">
+        <origin xyz="${wheel_dist_x} ${wheel_dist_y} 0" rpy="0 0 ${pie}" />
+        <parent link="base" />
+        <child link="front_left_wheel" />
+        <axis xyz="0 -1 0" />
+    </joint>
+
+    <link name="front_left_wheel">
+        <visual>
+            <origin rpy="0 0 0 " xyz="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/stl/blue_tyre.stl"
+                    scale="${scale_stl}" />
+            </geometry>
+            <material name="black" />
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0 " />
+            <geometry>
+                <mesh filename="package://robot_description/stl/blue_tyre.stl"
+                    scale="${scale_stl}" />
+            </geometry>
+        </collision>
+    </link>
+
+
+    <joint name="rear_right_wheel_joint" type="continuous">
+        <origin xyz="-${wheel_dist_x} -${wheel_dist_y} 0" rpy="0 0 0" />
+        <parent link="base" />
+        <child link="rear_right_wheel" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+    <link name="rear_right_wheel">
+        <visual>
+            <origin rpy="0 0 0 " xyz="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/stl/blue_tyre.stl"
+                    scale="${scale_stl}" />
+            </geometry>
+            <material name="black" />
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0 " />
+            <geometry>
+                <mesh filename="package://robot_description/stl/blue_tyre.stl"
+                    scale="${scale_stl}" />
+            </geometry>
+        </collision>
+    </link>
+
+
+    <joint name="rear_left_wheel_joint" type="continuous">
+        <origin xyz="-${wheel_dist_x} ${wheel_dist_y} 0" rpy="0 0 -${pie}" />
+        <parent link="base" />
+        <child link="rear_left_wheel" />
+        <axis xyz="0 -1 0" />
+    </joint>
+
+    <link name="rear_left_wheel">
+        <visual>
+            <origin rpy="0 0 0 " xyz="0 0 0" />
+            <geometry>
+                <mesh filename="package://robot_description/stl/blue_tyre.stl"
+                    scale="${scale_stl}" />
+            </geometry>
+            <material name="black" />
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0 " />
+            <geometry>
+                <mesh filename="package://robot_description/stl/blue_tyre.stl"
+                    scale="${scale_stl}" />
+            </geometry>
+        </collision>
+    </link>
+
+
+    <joint name="laser_joint" type="fixed">
+        <origin xyz="${lidar_dist_x} ${lidar_dist_y} ${lidar_dist_z} " rpy="0 0 0" />
+        <parent link="base" />
+        <child link="laser" />
+    </joint>
+
+    <link name="laser">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0 " />
+            <geometry>
+                <mesh filename="package://robot_description/stl/mid_360.stl"
+                    scale="${scale_stl}" />
+            </geometry>
+            <material name="blue" />
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://robot_description/stl/mid_360.stl"
+                    scale="${scale_stl}" />
+            </geometry>
+        </collision>
+    </link>
+
+
+</robot>
