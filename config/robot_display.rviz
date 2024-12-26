@@ -108,6 +108,45 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        base:
+          Value: true
+        base_link:
+          Value: true
+        front_left_wheel:
+          Value: true
+        front_right_wheel:
+          Value: true
+        laser:
+          Value: true
+        rear_left_wheel:
+          Value: true
+        rear_right_wheel:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        base_link:
+          base:
+            front_left_wheel:
+              {}
+            front_right_wheel:
+              {}
+            laser:
+              {}
+            rear_left_wheel:
+              {}
+            rear_right_wheel:
+              {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -169,10 +208,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8453975915908813
+      Pitch: 0.13539904356002808
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.258578777313232
+      Yaw: 4.90358304977417
     Saved: ~
 Window Geometry:
   Displays:
