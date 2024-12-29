@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<robot name="test_robot" xmlns:xacro="http://ros.org/wiki/xacro">
+    <!-- Single material -->
+    <material name="grey">
+        <color rgba="0.9 0.95 0.95 1.0" />
+    </material>
+
+    <!-- Only essential properties -->
+    <xacro:property name="scale_stl" value="1 1 1" />
+    <xacro:property name="wheel_dist_x" value="0.21" />
+    <xacro:property name="wheel_dist_y" value="0.35" />
+
+    <!-- Base link -->
+    <link name="base_link">
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001" />
+        </inertial>
+    </link>
+
+    <!-- Base -->
+    <link name="base">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <box size="0.5 0.3 0.15" />
+            </geometry>
+            <material name="grey" />
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.5 0.3 0.15" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="15.0" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia
+                ixx="0.2" ixy="0.0" ixz="0.0"
+                iyy="0.2" iyz="0.0"
+                izz="0.2" />
+        </inertial>
+    </link>
+
+    <!-- Single wheel -->
+    <link name="front_right_wheel">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://myrobot_description/stl/blue_tyre.stl"
+                    scale="${scale_stl}" />
+            </geometry>
+            <!-- <geometry>
+                <cylinder radius="0.1" length="0.05" />
+            </geometry> -->
+
+            <material name="grey" />
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.1" length="0.05" />
+            </geometry>
+
+        </collision>
+        <inertial>
+            <mass value="1.0" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia
+                ixx="0.001" ixy="0" ixz="0"
+                iyy="0.001" iyz="0"
+                izz="0.001" />
+        </inertial>
+    </link>
+
+    <!-- Basic joints -->
+    <joint name="base_link_to_base" type="fixed">
+        <parent link="base_link" />
+        <child link="base" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
+
+    <joint name="front_right_wheel_joint" type="continuous">
+        <origin xyz="${wheel_dist_x} -${wheel_dist_y} 0" rpy="0 0 0" />
+        <parent link="base" />
+        <child link="front_right_wheel" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+</robot>

@@ -7,11 +7,12 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
     # Get the path to your xacro file
-    pkg_path = get_package_share_directory('robot_description')
-    xacro_path = os.path.join(pkg_path, 'urdf', 'robot.urdf.xacro')
+    pkg_share_path = get_package_share_directory('myrobot_description')
+    xacro_path = os.path.join(pkg_share_path, 'urdf', 'myrobot.urdf.xacro')
 
-    rviz_config_path = os.path.join(pkg_path, 'config', 'robot_display.rviz')
-    # Process the URDF via xacro
+    rviz_config_path = os.path.join(pkg_share_path, 'config', 'robot_display.rviz')
+    
+    # Process the URDF via xacro and store the .urdf as a string in parameter robot_description
     robot_description = ParameterValue(
         Command(['xacro ', xacro_path]),
         value_type=str
