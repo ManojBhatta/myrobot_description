@@ -25,7 +25,7 @@ install(DIRECTORY config/
 # install(FILES urdf/robot.urdf
 #   DESTINATION share/${PROJECT_NAME}/urdf
 # )
-install(FILES urdf/claude_robot.urdf.xacro
+install(FILES urdf/myrobot.urdf.xacro
   DESTINATION share/${PROJECT_NAME}/urdf
 )
 
