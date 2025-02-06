@@ -28,23 +28,15 @@ def generate_launch_description():
         }]
     )
 
-    # Create a joint_state_publisher node
-    joint_state_publisher_node = Node(
-        package='joint_state_publisher_gui',
-        executable='joint_state_publisher_gui',
-        name='joint_state_publisher',
-        output='screen'
-    )
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
         name='rviz2',
         output='screen',
-        arguments=['-d', rviz_config_path]
+        arguments=['-d', rviz_config_path, '--ros-args', '-p', 'use_sim_time:=True']
     )
     # Return launch description
     return LaunchDescription([
         robot_state_publisher_node,
-        joint_state_publisher_node,
         rviz_node
     ])

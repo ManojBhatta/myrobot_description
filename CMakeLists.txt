@@ -12,22 +12,14 @@ find_package(urdf REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
-install(DIRECTORY stl/
-  DESTINATION share/${PROJECT_NAME}/stl
+install(
+  DIRECTORY meshes launch config urdf
+  DESTINATION share/${PROJECT_NAME}
 )
 
-install(DIRECTORY launch/
-  DESTINATION share/${PROJECT_NAME}/launch
-)
-install(DIRECTORY config/
-  DESTINATION share/${PROJECT_NAME}/config
-)
-# install(FILES urdf/robot.urdf
+# install(FILES urdf/myrobot.urdf.xacro
 #   DESTINATION share/${PROJECT_NAME}/urdf
 # )
-install(FILES urdf/myrobot.urdf.xacro
-  DESTINATION share/${PROJECT_NAME}/urdf
-)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
