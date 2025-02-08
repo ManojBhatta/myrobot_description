@@ -28,14 +28,17 @@
           <max>12</max>
         </range>
       </ray>
-      <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+      <plugin name="lidar_plugin" filename="libgazebo_ros_ray_sensor.so">
         <ros>
-          <argument>~/out:=cloud_in</argument>
+          <argument>~/out:=livox/lidar</argument>
+          <!-- <remapping>scan:=/lidar/scan</remapping> -->
+          <!-- <remapping>scan:=/livox/lidar</remapping> -->
+        <!-- <frame_name>laser</frame_name> -->
         </ros>
+        <topicName>livox/lidar</topicName>
         <output_type>sensor_msgs/PointCloud2</output_type>
-        <frame_name>laser</frame_name>
       </plugin>
-    </sensor> 
+    </sensor>
   </gazebo>
 
 
